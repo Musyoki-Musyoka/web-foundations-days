@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Note Draft | Day 4</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <header class="page-header">
+      <div>
+        <p class="eyebrow">Web Foundations · Day 4</p>
+        <h1>Note Draft</h1>
+        <p>Make room for your next idea.</p>
+      </div>
+      <button id="theme-toggle" class="outline-button" type="button" aria-pressed="false">
+        Dark mode
+      </button>
+    </header>
+
+    <main>
+      <section class="editor" aria-labelledby="editor-title">
+        <h2 id="editor-title">Your draft</h2>
+        <p id="note-help">Saved in this browser as you type. Aim for 200 characters or fewer.</p>
+        <label for="note-text">Note text</label>
+        <textarea
+          id="note-text"
+          name="note-text"
+          rows="8"
+          placeholder="Write something worth remembering..."
+          aria-describedby="note-help char-count word-count"
+        ></textarea>
+
+        <div class="counters" aria-live="polite">
+          <p id="char-count">0 / 200 characters</p>
+          <p id="word-count">0 words</p>
+        </div>
+
+        <button id="clear-btn" type="button">Clear</button>
+        <p class="keyboard-hint">You can also press Escape while writing to clear the draft.</p>
+        <p id="storage-message" class="storage-message" role="status"></p>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2026 · Built during Web Foundations.</p>
+    </footer>
+  </body>
+</html>
