@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Directory | Day 5</title>
+    <script src="users.js" defer></script>
+    <style>
+      :root {
+        --background: #f2f5f3;
+        --surface: #ffffff;
+        --text: #223b33;
+        --muted: #53675d;
+        --border: #cedbd3;
+        --accent: #145c49;
+        --accent-hover: #0b4535;
+        --error: #982639;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--background);
+        color: var(--text);
+        font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+        line-height: 1.6;
+      }
+
+      header {
+        padding: 32px 20px;
+        background: var(--accent);
+        color: #ffffff;
+      }
+
+      .header-content,
+      main {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 2rem;
+        line-height: 1.2;
+      }
+
+      header p {
+        margin: 10px 0 0;
+        color: #e3f0e9;
+      }
+
+      main {
+        padding-block: 28px;
+      }
+
+      section {
+        padding: 24px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: var(--surface);
+      }
+
+      h2 {
+        margin: 0 0 16px;
+        font-size: 1.25rem;
+      }
+
+      .controls {
+        display: flex;
+        align-items: flex-end;
+        gap: 16px;
+      }
+
+      .filter-field {
+        flex: 1;
+        min-width: 0;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 0.9rem;
+        font-weight: 600;
+      }
+
+      input,
+      button {
+        min-height: 44px;
+        padding: 10px 14px;
+        border-radius: 6px;
+        font: inherit;
+      }
+
+      input {
+        width: 100%;
+        border: 1px solid #9daf9f;
+        background: var(--surface);
+        color: var(--text);
+      }
+
+      input::placeholder {
+        color: var(--muted);
+      }
+
+      button {
+        flex-shrink: 0;
+        border: 1px solid var(--accent);
+        background: var(--accent);
+        color: #ffffff;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      button:hover:not(:disabled) {
+        background: var(--accent-hover);
+      }
+
+      button:disabled,
+      input:disabled {
+        opacity: 0.6;
+        cursor: wait;
+      }
+
+      button:focus-visible,
+      input:focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+
+      #filter-help,
+      footer {
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+
+      #filter-help {
+        margin: 10px 0 0;
+      }
+
+      #status {
+        margin: 18px 0;
+        font-size: 0.9rem;
+      }
+
+      #status.error {
+        color: var(--error);
+        font-weight: 600;
+      }
+
+      #status.success {
+        color: var(--accent);
+      }
+
+      #users-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+      }
+
+      .user-card {
+        min-width: 0;
+        padding: 16px;
+        border: 1px solid var(--border);
+        border-left: 4px solid var(--accent);
+        border-radius: 7px;
+      }
+
+      .user-card h3 {
+        margin: 0 0 10px;
+        font-size: 1rem;
+        overflow-wrap: anywhere;
+      }
+
+      .user-card p {
+        margin: 4px 0;
+        font-size: 0.85rem;
+        overflow-wrap: anywhere;
+      }
+
+      footer {
+        padding: 0 20px 24px;
+        text-align: center;
+      }
+
+      @media (max-width: 840px) {
+        main {
+          margin-inline: 20px;
+        }
+      }
+
+      @media (max-width: 600px) {
+        section {
+          padding: 20px;
+        }
+
+        .controls {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        #users-list {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="header-content">
+        <h1>User Directory</h1>
+        <p>Load users from an API, then find them by name.</p>
+      </div>
+    </header>
+
+    <main>
+      <section aria-labelledby="directory-heading">
+        <h2 id="directory-heading">Browse users</h2>
+        <div class="controls">
+          <button id="load-users" type="button">Load users</button>
+          <div class="filter-field">
+            <label for="filter-input">Filter by name</label>
+            <input
+              id="filter-input"
+              type="search"
+              name="filter"
+              placeholder="Type part of a name..."
+              aria-describedby="filter-help"
+              autocomplete="off"
+            >
+          </div>
+        </div>
+        <p id="filter-help">Filtering uses the users already loaded. It does not send another request.</p>
+        <p id="status" role="status" aria-live="polite">Click Load users to fetch the directory.</p>
+        <ul id="users-list" aria-busy="false"></ul>
+      </section>
+    </main>
+
+    <footer>
+      <p>Web Foundations · Day 5 · JSONPlaceholder practice data</p>
+    </footer>
+  </body>
+</html>
